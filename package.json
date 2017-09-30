@@ -1,0 +1,14 @@
+{
+  "name": "visual-temp",
+  "version": "1.0.0",
+  "description": "Temperature portal",
+  "main": "index.js",
+  "author": "Ilkka Oksanen <iao@iki.fi>",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.3.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
