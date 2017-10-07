@@ -7,9 +7,12 @@
   "license": "MIT",
   "dependencies": {
     "koa": "^2.3.0",
-    "koa-router": "^7.2.1"
+    "koa-body": "^2.5.0",
+    "koa-router": "^7.2.1",
+    "node-pg-migrate": "^2.11.1",
+    "pg": "^7.3.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "pg-migrate up && node index.js"
   }
 }
