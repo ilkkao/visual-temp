@@ -8,32 +8,37 @@ import styles from './app.css';
 const cx = classNames.bind(styles);
 
 render((
-  <div className={cx('container')}>
-    <InfoBox
-      title="Latest"
-      body={`${data.latest.value} °C`}
-      footer={data.latest.ts}
-    />
-    <InfoBox
-      title="Max today"
-    />
-    <InfoBox
-      title="Min today"
-    />
-    <InfoBox
-      title="Max yesterday"
-    />
-    <InfoBox
-      title="Min yesterday"
-    />
-    <InfoBox
-      title="Max ever"
-    />
-    <InfoBox
-      title="Min ever"
-    />
-    <TimeChart
-      data={data.history}
-    />
+  <div>
+    <div className={cx('title')}>
+      Temperature monitor
+    </div>
+    <div className={cx('container')}>
+      <InfoBox
+        title="LATEST"
+        body={`${data.latest.value} °C`}
+        footer={data.latest.ts}
+      />
+      <InfoBox
+        title="MAX TODAY"
+      />
+      <InfoBox
+        title="MIN TODAY"
+      />
+      <InfoBox
+        title="MAX YESTERDAY"
+      />
+      <InfoBox
+        title="MIN YESTERDAY"
+      />
+      <InfoBox
+        title="MAX EVER"
+      />
+      <InfoBox
+        title="MIN EVER"
+      />
+      <TimeChart
+        data={data.history}
+      />
+    </div>
   </div>
 ), document.getElementById('main'));

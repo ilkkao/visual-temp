@@ -15,46 +15,58 @@ class TimeChart extends Component {
 
     return (
       <div className={cx('container')}>
-        <ResponsiveContainer width="100%" height={500}>
-          <LineChart
-            data={data}
-            margin={{ top: 6, right: 6, left: -26, bottom: 6 }}
+        <div className={cx('title')}>
+          TEMPERATURE DURING THE LAST 24 HOURS
+        </div>
+        <div className={cx('body')}>
+          <ResponsiveContainer
+            width="100%"
+            height={400}
           >
-            <XAxis
-              dataKey="time"
-              type="category"
-              stroke="#fff"
-              strokeWidth={2}
-              label={{ position: 'top' }}
-              dy={14}
-            />
-            <YAxis
-              scale="linear"
-              type="number"
-              stroke="#fff"
-              strokeWidth={2}
-              domain={['dataMin - 1', 'dataMax + 1']}
-              dx={-14}
+            <LineChart
+              data={data}
+              margin={{ top: 6, right: 6, left: -26, bottom: 6 }}
             >
-            </YAxis>
-            <CartesianGrid stroke='#f5f5f533' />
-            <Tooltip
-              wrapperStyle={{ backgroundColor: "#0099ff" }}
-              labelStyle={{ color: "#fff" }}
-              itemStyle={{ color: "#fff" }}
-            />
-            <Line
-              type="natural"
-              unit="°C"
-              animationDurationNumber={500}
-              dataKey="value"
-              stroke="#ffe700"
-              strokeWidth={2}
-              activeDot={{ stroke: "red", r: 4 }}
-              dot={{ stroke: "#fff", r: 0.4 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+              <XAxis
+                dataKey="time"
+                type="category"
+                stroke="#fff"
+                strokeWidth={2}
+                label={{ position: 'top' }}
+                dy={14}
+                tickCount={12}
+                interval={20}
+              />
+              <YAxis
+                scale="linear"
+                type="number"
+                stroke="#fff"
+                strokeWidth={2}
+                domain={['dataMin - 1', 'dataMax + 1']}
+                dx={-14}
+              >
+              </YAxis>
+              <CartesianGrid
+                stroke='#f5f5f522'
+              />
+              <Tooltip
+                wrapperStyle={{ backgroundColor: "#0099ff" }}
+                labelStyle={{ color: "#fff" }}
+                itemStyle={{ color: "#fff" }}
+              />
+              <Line
+                type="natural"
+                unit="°C"
+                animationDurationNumber={500}
+                dataKey="value"
+                stroke="#ffe700"
+                strokeWidth={2}
+                activeDot={{ stroke: "red", r: 4 }}
+                dot={{ stroke: "#fff", r: 0.4 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     );
   }
