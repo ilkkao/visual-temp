@@ -11,6 +11,11 @@ COPY wait-for-postgres.sh /app/
 WORKDIR /app/
 
 RUN yarn install
+
+COPY webpack.config.js /app/
+COPY .babelrc /app/
+COPY js /app/js
+
 RUN yarn run prod
 
 COPY migrations /app/migrations
