@@ -18,7 +18,7 @@ class TimeChart extends Component {
         <ResponsiveContainer width="100%" height={500}>
           <LineChart
             data={data}
-            margin={{ top: 10, right: 10, left: -20, bottom: 10 }}
+            margin={{ top: 6, right: 6, left: -26, bottom: 6 }}
           >
             <XAxis
               dataKey="time"
@@ -40,16 +40,18 @@ class TimeChart extends Component {
             <CartesianGrid stroke='#f5f5f533' />
             <Tooltip
               wrapperStyle={{ backgroundColor: "#0099ff" }}
+              labelStyle={{ color: "#fff" }}
+              itemStyle={{ color: "#fff" }}
             />
             <Line
               type="natural"
-              unit="C"
+              unit="°C"
               animationDurationNumber={500}
               dataKey="value"
-              stroke="#ffff00"
+              stroke="#ffe700"
               strokeWidth={2}
-              activeDot={{ r: 4 }}
-              dot={{ r: 1 }}
+              activeDot={{ stroke: "red", r: 4 }}
+              dot={{ stroke: "#fff", r: 0.4 }}
             />
           </LineChart>
         </ResponsiveContainer>

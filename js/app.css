@@ -7,11 +7,17 @@
 
 body {
   font-family: "system";
-  padding: 40px 40px;
+  padding: 24px 24px;
   background-color: #333;
 }
 
 .container {
   display: flex;
   flex-wrap: wrap;
+}
+
+.title {
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 18px;
 }
