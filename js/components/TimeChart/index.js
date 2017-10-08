@@ -33,7 +33,7 @@ class TimeChart extends Component {
               type="number"
               stroke="#fff"
               strokeWidth={2}
-              domain={['dataMin - 5', 'dataMax + 5']}
+              domain={['dataMin - 1', 'dataMax + 1']}
               dx={-14}
             >
             </YAxis>
