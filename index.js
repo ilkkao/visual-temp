@@ -1,7 +1,12 @@
+const fs = require('fs');
 const { Client } = require('pg')
 const Koa = require('koa');
 const Router = require('koa-router');
+const compress = require('koa-compress');
 const body = require('koa-body');
+const send = require('koa-send');
+const ejs = require('ejs');
+const moment = require('moment');
 
 const app = new Koa();
 const router = new Router();
@@ -9,11 +14,66 @@ const pgClient = new Client();
 
 const PORT = 38000;
 
+const indexTemplate = ejs.compile(fs.readFileSync('templates/index.ejs', { encoding: 'utf8' }));
+const manifest = JSON.parse(fs.readFileSync('dist/manifest.json', { encoding: 'utf8' }));
+
+app.use(compress());
+
 router.get('/', async (ctx, next) => {
   const res = await pgClient.query('SELECT ts, value FROM temperatures ORDER BY ts desc LIMIT 1');
-  const { ts, value } = res.rows[0];
+  const { ts: latestTs, value: latestValue } = res.rows[0];
 
-  ctx.body = `<h1>Temperature: ${value}</h1><p>${ts}`;
+  const res2 = await pgClient.query('SELECT ts, value FROM temperatures WHERE ts > now() - interval \'1 day\'');
+
+  const history = res2.rows.map(row => ({ time: moment(row.ts).format('HH:mm'), value: row.value }));
+
+  ctx.body = indexTemplate({
+    data: {
+      latest: {
+        value: latestValue,
+        ts: moment(latestTs).fromNow(),
+      },
+      today: {
+        min: {
+          value: 4.3,
+          ts: 3211212
+        },
+        max: {
+          value: 4.3,
+          ts: 3211212
+        }
+      },
+      yesterday: {
+        min: {
+          value: 4.3,
+          ts: 3211212
+        },
+        max: {
+          value: 4.3,
+          ts: 3211212
+        }
+      },
+      ever: {
+        min: {
+          value: 4.3,
+          ts: 3211212
+        },
+        max: {
+          value: 4.3,
+          ts: 3211212
+        }
+      },
+      history
+    },
+    manifest
+  });
+});
+
+router.get('/assets/:file', async (ctx, next) => {
+  await send(ctx, ctx.params.file, {
+    root: 'dist',
+    maxage: 200
+  });
 });
 
 router.get('/latest.json', async (ctx, next) => {

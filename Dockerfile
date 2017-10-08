@@ -11,9 +11,10 @@ COPY wait-for-postgres.sh /app/
 WORKDIR /app/
 
 RUN yarn install
+RUN yarn run prod
 
 COPY migrations /app/migrations
+COPY templates /app/templates
 COPY index.js /app/
-
 
 CMD yarn start

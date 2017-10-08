@@ -1,0 +1,32 @@
+.container {
+  background-color: #0099ff;
+  width: 100px;
+  height: 100px;
+  padding: 12px;
+  margin: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.body {
+  font-size: 22px;
+  color: #ffff00;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
