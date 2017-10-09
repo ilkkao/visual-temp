@@ -55,7 +55,7 @@ class TimeChart extends Component {
                 itemStyle={{ color: "#fff" }}
               />
               <Line
-                type="natural"
+                type="basis"
                 unit="°C"
                 animationDurationNumber={500}
                 dataKey="value"
