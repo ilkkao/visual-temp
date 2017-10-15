@@ -59,11 +59,11 @@ router.get('/', async (ctx, next) => {
       },
       ever: {
         min: {
-          value: moment(lowestEverValue).unix(),
+          value: lowestEverValue,
           ts: moment(lowestEverTs).unix()
         },
         max: {
-          value: moment(highestEverValue).unix(),
+          value: highestEverValue),
           ts: moment(highestEverTs).unix()
         }
       },
