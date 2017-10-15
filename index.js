@@ -23,7 +23,7 @@ router.get('/', async (ctx, next) => {
   const res = await pgClient.query('SELECT ts, value FROM temperatures ORDER BY ts desc LIMIT 1');
   const { ts: latestTs, value: latestValue } = res.rows[0];
 
-  const res2 = await pgClient.query('SELECT ts, value FROM temperatures WHERE ts > now() - interval \'25 day\'');
+  const res2 = await pgClient.query('SELECT ts, value FROM temperatures WHERE ts > now() - interval \'1 day\'');
   const history = res2.rows.map(row => ({ time: moment(row.ts).unix(), value: row.value }));
 
   const res3 = await pgClient.query('SELECT ts, value FROM temperatures ORDER BY value desc LIMIT 1');
