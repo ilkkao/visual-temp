@@ -63,7 +63,7 @@ router.get('/', async (ctx, next) => {
           ts: moment(lowestEverTs).unix()
         },
         max: {
-          value: highestEverValue),
+          value: highestEverValue,
           ts: moment(highestEverTs).unix()
         }
       },
