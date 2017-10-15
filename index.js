@@ -23,9 +23,13 @@ router.get('/', async (ctx, next) => {
   const res = await pgClient.query('SELECT ts, value FROM temperatures ORDER BY ts desc LIMIT 1');
   const { ts: latestTs, value: latestValue } = res.rows[0];
 
-  const res2 = await pgClient.query('SELECT ts, value FROM temperatures WHERE ts > now() - interval \'1 day\'');
-
+  const res2 = await pgClient.query('SELECT ts, value FROM temperatures WHERE ts > now() - interval \'25 day\'');
   const history = res2.rows.map(row => ({ time: moment(row.ts).unix(), value: row.value }));
+
+  const res3 = await pgClient.query('SELECT ts, value FROM temperatures ORDER BY value desc LIMIT 1');
+  const res4 = await pgClient.query('SELECT ts, value FROM temperatures ORDER BY value asc LIMIT 1');
+  const { ts: highestEverTs, value: highestEverValue } = res3.rows[0];
+  const { ts: lowestEverTs, value: lowestEverValue } = res4.rows[0];
 
   ctx.body = indexTemplate({
     data: {
@@ -55,12 +59,12 @@ router.get('/', async (ctx, next) => {
       },
       ever: {
         min: {
-          value: 4.3,
-          ts: 3211212
+          value: moment(lowestEverValue).unix(),
+          ts: moment(lowestEverTs).unix()
         },
         max: {
-          value: 4.3,
-          ts: 3211212
+          value: moment(highestEverValue).unix(),
+          ts: moment(highestEverTs).unix()
         }
       },
       history
