@@ -58,7 +58,7 @@ class TimeChart extends Component {
                 type="basis"
                 unit="°C"
                 animationDurationNumber={500}
-                dataKey="value"
+                dataKey="temperature"
                 stroke="#ffe700"
                 strokeWidth={2}
                 activeDot={{ stroke: "red", r: 4 }}

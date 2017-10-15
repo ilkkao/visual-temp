@@ -28,6 +28,9 @@ const config = {
         }, {
             test: /\.(ttf|eot|svg|woff|woff2)$/,
             use: 'url-loader?limit=10000'
+        }, {
+            test: /\.json$/,
+            loader: 'json-loader'
         } ]
     },
     plugins: [

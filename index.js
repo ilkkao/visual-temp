@@ -25,13 +25,13 @@ router.get('/', async (ctx, next) => {
 
   const res2 = await pgClient.query('SELECT ts, value FROM temperatures WHERE ts > now() - interval \'1 day\'');
 
-  const history = res2.rows.map(row => ({ time: moment(row.ts).format('HH:mm'), value: row.value }));
+  const history = res2.rows.map(row => ({ time: moment(row.ts).unix(), value: row.value }));
 
   ctx.body = indexTemplate({
     data: {
       latest: {
         value: latestValue,
-        ts: moment(latestTs).fromNow(),
+        ts: moment(latestTs).unix(),
       },
       today: {
         min: {

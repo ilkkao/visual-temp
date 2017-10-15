@@ -1,11 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
+import moment from 'moment-timezone';
 import classNames from 'classnames/bind';
 import InfoBox from './components/InfoBox';
 import TimeChart from './components/TimeChart';
 import styles from './app.css';
 
 const cx = classNames.bind(styles);
+
+const historyValues = data.history.map(({ time, value }) => ({ time: moment.unix(time).tz('Europe/Helsinki').format('HH:mm'), temperature: value }));
+const latestTempTime = moment.unix(data.latest.ts).fromNow();
 
 render((
   <div>
@@ -16,7 +20,7 @@ render((
       <InfoBox
         title="LATEST"
         body={`${data.latest.value} °C`}
-        footer={data.latest.ts}
+        footer={latestTempTime}
       />
       <InfoBox
         title="MAX TODAY"
@@ -37,7 +41,7 @@ render((
         title="MIN EVER"
       />
       <TimeChart
-        data={data.history}
+        data={historyValues}
       />
     </div>
   </div>
