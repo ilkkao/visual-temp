@@ -1,4 +1,4 @@
-FROM node:8.6.0
+FROM node:12
 
 MAINTAINER Ilkka Oksanen <iao@iki.fi>
 
